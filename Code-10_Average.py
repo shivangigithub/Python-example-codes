@@ -10,21 +10,16 @@ avg = data[cols].mean()
 print(avg)
 
 #Method 2:
-f1=open("average.csv").read().split("\n")
+f1=open("average.txt").read().split("\n")
 List=f1
 Sum=0
 dict={}
 for i in range (0,len(List),1):
-	# print ("i ==============", i)
-	split = List[i].split(",")
+	split = List[i].split("\t")
 	for j in range (0,len(split),1):
-		# print ("j====", j)
-		dict.setdefault(j,[]).append(split[j])
-for key in dict:
-	value = dict[key]
-	Sum = 0
-	for i in value:
-		# print ("###########")
-		Sum += int(i)
-	print (dict[key])
-	print (Sum)
+		if j in dict:
+			value = int(dict[j]) + int(split[j])
+			dict[j]=value
+		else:
+			dict[j]=split[j]
+		print (dict)
